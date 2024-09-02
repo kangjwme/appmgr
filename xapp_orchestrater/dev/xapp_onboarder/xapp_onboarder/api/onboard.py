@@ -25,6 +25,8 @@ from xapp_onboarder.repo_manager.repo_manager import requests_retry_session, rep
 from xapp_onboarder.api.models.response_models import error_message_model, response, status_message_model
 from xapp_onboarder.helm_controller.xapp_schema import schema as xapp_schema
 
+from xapp_onboarder.detection_api.detection_api import detectionError, detection_api
+
 log = logging.getLogger(__name__)
 
 
@@ -57,6 +59,18 @@ def onboard(config_file, controls_schema_file):
                                     error_source="schema.json",
                                     error_message=err.message,
                                     status="Input payload validation failed")
+        return response_message.get_return()
+    
+    # detection_api in xApp
+    
+    try:
+        detection_api(config_file)
+    except detectionError as err:
+        log.error(str(err))
+        response_message = response(model=error_message_model, status_code=err.status_code,
+                                    error_source="config-file.json",
+                                    error_message=str(err),
+                                    status="Input API validation failed")
         return response_message.get_return()
 
     try:

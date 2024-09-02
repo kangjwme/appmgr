@@ -34,7 +34,7 @@ setup(
     author_email='zhehuang@research.att.com',
     include_package_data=True,
     packages=find_packages(),
-    package_data={'': ['*.yaml', '*.tpl', '*.conf', 'xapp_onboarder', 'cli']},
+    package_data={'': ['*.yaml', '*.tpl', '*.conf', 'xapp_onboarder', 'cli', '.json']},
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",

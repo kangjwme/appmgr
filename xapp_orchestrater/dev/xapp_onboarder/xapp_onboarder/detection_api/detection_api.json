@@ -1,0 +1,4 @@
+{
+    "api": ["RIC_E2_SETUP_REQ",
+            "RIC_SUB_RESP"]
+}
